@@ -28,7 +28,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private Environment env;
 
     /** The encryption SALT. */
-    private static final String SALT = "fdalkjalk;3jlwf00sfaof";
+    private static final String SALT = "bbfgno[hnrtiohpi9-byrt0";
 
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {
