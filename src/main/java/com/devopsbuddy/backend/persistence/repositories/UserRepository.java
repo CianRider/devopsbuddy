@@ -8,9 +8,6 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-/**
- * Created by tedonema on 29/03/2016.
- */
 @Repository
 @Transactional(readOnly = true)
 public interface UserRepository extends CrudRepository<User, Long> {

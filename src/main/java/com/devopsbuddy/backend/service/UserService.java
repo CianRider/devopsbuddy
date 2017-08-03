@@ -18,9 +18,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Set;
 
-/**
- * Created by tedonema on 30/03/2016.
- */
 @Service
 @Transactional(readOnly = true)
 public class UserService {

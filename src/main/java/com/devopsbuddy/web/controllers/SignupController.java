@@ -36,9 +36,6 @@ import java.time.Clock;
 import java.time.LocalDate;
 import java.util.*;
 
-/**
- * Created by tedonema on 26/04/2016.
- */
 @Controller
 public class    SignupController {
 

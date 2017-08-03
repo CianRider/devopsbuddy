@@ -17,9 +17,6 @@ import java.security.SecureRandom;
 import java.util.Arrays;
 import java.util.List;
 
-/**
- * Created by tedonema on 26/03/2016.
- */
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {

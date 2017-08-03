@@ -1,10 +1,5 @@
 package com.devopsbuddy.web.domain.frontend;
 
-/**
- * Includes credit card information.
- *
- * Created by tedonema on 26/04/2016.
- */
 public class ProAccountPayload extends BasicAccountPayload {
 
     private String cardNumber;

@@ -5,9 +5,6 @@ import com.devopsbuddy.web.domain.frontend.ProAccountPayload;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * Created by tedonema on 13/05/2016.
- */
 public class StripeUtils {
 
     public static final String STRIPE_CARD_NUMBER_KEY = "number";

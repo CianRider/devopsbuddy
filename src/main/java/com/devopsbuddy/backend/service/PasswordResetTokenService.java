@@ -15,9 +15,6 @@ import java.time.Clock;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
-/**
- * Created by tedonema on 10/04/2016.
- */
 @Service
 @Transactional(readOnly = true)
 public class PasswordResetTokenService {
