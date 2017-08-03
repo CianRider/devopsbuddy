@@ -11,16 +11,19 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+/**
+ * Created by tedonema on 20/03/2016.
+ */
 @Controller
 public class ContactController {
 
-    // The application logger
+    /** The application logger */
     private static final Logger LOG = LoggerFactory.getLogger(ContactController.class);
 
-    // The key which identifies the feedback payload in the Model.
+    /** The key which identifies the feedback payload in the Model. */
     public static final String FEEDBACK_MODEL_KEY = "feedback";
 
-    // The Contact Us view name.
+    /** The Contact Us view name. */
     private static final String CONTACT_US_VIEW_NAME = "contact/contact";
 
     @Autowired

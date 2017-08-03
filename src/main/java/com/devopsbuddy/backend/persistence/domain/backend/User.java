@@ -1,17 +1,25 @@
 package com.devopsbuddy.backend.persistence.domain.backend;
 
 import org.hibernate.validator.constraints.Length;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * Created by tedonema on 28/03/2016.
+ */
 @Entity
-public class User implements Serializable {
+public class User implements Serializable, UserDetails {
 
-    // The Serial Version UID for Serializable classes
-    private static final long serialVersionUID= 1L;
+    /** The Serial Version UID for Serializable classes. */
+    private static final long serialVersionUID = 1L;
+
+
     public User() {
 
     }
@@ -20,10 +28,12 @@ public class User implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
+    @Column(unique = true)
     private String username;
 
     private String password;
 
+    @Column(unique = true)
     private String email;
 
     @Column(name = "first_name")
@@ -52,15 +62,24 @@ public class User implements Serializable {
     @JoinColumn(name = "plan_id")
     private Plan plan;
 
+
+
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<UserRole> userRoles = new HashSet<>();
 
-    public Set<UserRole> getUserRoles() {
-        return userRoles;
+    @OneToMany(
+            cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY,
+            mappedBy = "user"
+    )
+    private Set<PasswordResetToken> passwordResetTokens = new HashSet<>();
+
+    public Set<PasswordResetToken> getPasswordResetTokens() {
+        return passwordResetTokens;
     }
 
-    public void setUserRoles(Set<UserRole> userRoles) {
-        this.userRoles = userRoles;
+    public void setPasswordResetTokens(Set<PasswordResetToken> passwordResetTokens) {
+        this.passwordResetTokens = passwordResetTokens;
     }
 
     public long getId() {
@@ -75,16 +94,10 @@ public class User implements Serializable {
         return username;
     }
 
+
+
     public void setUsername(String username) {
         this.username = username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     public String getEmail() {
@@ -159,6 +172,36 @@ public class User implements Serializable {
         this.enabled = enabled;
     }
 
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        Set<GrantedAuthority> authorities = new HashSet<>();
+        userRoles.forEach(ur -> authorities.add(new Authority(ur.getRole().getName())));
+        return authorities;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
     public Plan getPlan() {
         return plan;
     }
@@ -166,6 +209,16 @@ public class User implements Serializable {
     public void setPlan(Plan plan) {
         this.plan = plan;
     }
+
+    public Set<UserRole> getUserRoles() {
+        return userRoles;
+    }
+
+    public void setUserRoles(Set<UserRole> userRoles) {
+        this.userRoles = userRoles;
+    }
+
+
 
     @Override
     public boolean equals(Object o) {
@@ -175,10 +228,14 @@ public class User implements Serializable {
         User user = (User) o;
 
         return id == user.id;
+
     }
 
     @Override
     public int hashCode() {
         return (int) (id ^ (id >>> 32));
     }
+
+
 }
+

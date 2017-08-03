@@ -1,10 +1,15 @@
 package com.devopsbuddy.enums;
 
+/**
+ * Defines the possible roles.
+ * Created by tedonema on 30/03/2016.
+ */
 public enum RolesEnum {
 
     BASIC(1, "ROLE_BASIC"),
     PRO(2, "ROLE_PRO"),
     ADMIN(3, "ROLE_ADMIN");
+
 
     private final int id;
 
@@ -15,7 +20,11 @@ public enum RolesEnum {
         this.roleName = roleName;
     }
 
-    public int getId() { return id; }
+    public int getId() {
+        return id;
+    }
 
-    public String getRoleName() { return roleName; }
+    public String getRoleName() {
+        return roleName;
+    }
 }

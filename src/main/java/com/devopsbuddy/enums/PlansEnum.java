@@ -1,9 +1,13 @@
 package com.devopsbuddy.enums;
 
+/**
+ * Created by tedonema on 30/03/2016.
+ */
 public enum PlansEnum {
 
     BASIC(1, "Basic"),
     PRO(2, "Pro");
+
 
     private final int id;
 
@@ -14,7 +18,11 @@ public enum PlansEnum {
         this.planName = planName;
     }
 
-    public int getId() { return id; }
+    public int getId() {
+        return id;
+    }
 
-    public String getPlanName() { return planName; }
+    public String getPlanName() {
+        return planName;
+    }
 }

@@ -2,9 +2,12 @@ package com.devopsbuddy.web.domain.frontend;
 
 import java.io.Serializable;
 
+/**
+ * Created by tedonema on 20/03/2016.
+ */
 public class FeedbackPojo implements Serializable {
 
-    private static final long serialVarsionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
     private String email;
     private String firstName;

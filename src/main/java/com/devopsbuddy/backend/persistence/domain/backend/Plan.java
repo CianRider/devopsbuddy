@@ -6,13 +6,14 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import java.io.Serializable;
 
-
+/**
+ * Created by tedonema on 28/03/2016.
+ */
 @Entity
 public class Plan implements Serializable {
 
     /** The Serial Version UID for Serializable classes. */
     private static final long serialVersionUID = 1L;
-
 
     @Id
     private int id;
