@@ -20,16 +20,4 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @PropertySource("file:///${user.home}/devopsbuddy/application-common.properties")
 @PropertySource("file:///${user.home}/devopsbuddy/stripe.properties")
 public class ApplicationConfig {
-
-    @Value("${aws.s3.profile}")
-    private String awsProfileName;
-
-    @Bean
-    public AmazonS3Client s3Client() {
-        AWSCredentials credentials = new ProfileCredentialsProvider(awsProfileName).getCredentials();
-        AmazonS3Client s3Client = new AmazonS3Client(credentials);
-        Region region = Region.getRegion(Regions.EU_WEST_1);
-        s3Client.setRegion(region);
-        return s3Client;
-    }
 }

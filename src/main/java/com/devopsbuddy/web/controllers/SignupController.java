@@ -5,8 +5,6 @@ import com.devopsbuddy.backend.persistence.domain.backend.Role;
 import com.devopsbuddy.backend.persistence.domain.backend.User;
 import com.devopsbuddy.backend.persistence.domain.backend.UserRole;
 import com.devopsbuddy.backend.service.PlanService;
-import com.devopsbuddy.backend.service.S3Service;
-import com.devopsbuddy.backend.service.StripeService;
 import com.devopsbuddy.backend.service.UserService;
 import com.devopsbuddy.enums.PlansEnum;
 import com.devopsbuddy.enums.RolesEnum;
@@ -44,12 +42,6 @@ public class    SignupController {
 
     @Autowired
     private UserService userService;
-
-    @Autowired
-    private S3Service s3Service;
-
-    @Autowired
-    private StripeService stripeService;
 
     /** The application logger */
     private static final Logger LOG = LoggerFactory.getLogger(SignupController.class);
@@ -127,7 +119,7 @@ public class    SignupController {
         // Stores the profile image on Amazon S3 and stores the URL in the user's record
         if (file != null && !file.isEmpty()) {
 
-            String profileImageUrl = s3Service.storeProfileImage(file, payload.getUsername());
+            String profileImageUrl = null;
             if (profileImageUrl != null) {
                 user.setProfileImageUrl(profileImageUrl);
             } else {
@@ -179,10 +171,7 @@ public class    SignupController {
             customerParams.put("email", payload.getEmail());
             customerParams.put("plan", selectedPlan.getId());
             LOG.info("Subscribing the customer to plan {}", selectedPlan.getName());
-            String stripeCustomerId = stripeService.createCustomer(stripeTokenParams, customerParams);
             LOG.info("Username: {} has been subscribed to Stripe", payload.getUsername());
-
-            user.setStripeCustomerId(stripeCustomerId);
 
             registeredUser = userService.createUser(user, PlansEnum.PRO, roles);
             LOG.debug(payload.toString());
